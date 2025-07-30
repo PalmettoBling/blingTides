@@ -4,15 +4,24 @@
     <meta charset="UTF-8" />
     <title>Tides Charts</title>
     <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> -->
+    <script async src="./assets/js/main.js"></script>
 </head>
-<body>
-    <h1>Station Selection:</h1>
-    <p>Charleston, SC - Station ID 8665530</p>
-    <form action="station_tide_prediction_chart.html" method="get">
-        <label for="station">Charleston, SC. Station: 8665530</label>
-    </form>
-    <!--<a href="station_chart">
-        <input type="button" value="Submit">
-    </a>-->
+<body>    
+    <h1>Tides Chart</h3>
+        <h2>Station Info:</h2>
+            <table>
+                <tr>
+                    <th>Station Locationnvm</th>
+                    <th>Station ID</th>
+                </tr>
+                <tr>
+                    <td>Charleston, SC</td>
+                    <td>8665530</td>
+                </tr>
+            </table>
+
+            <div>
+                <canvas id="tidesGraph"></canvas>
+            </div>
 </body>
 </html>
