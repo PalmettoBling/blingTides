@@ -1,4 +1,4 @@
-import Chart from 'chart.js/auto';
+import Chart from 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.js'
 
 const baseUri = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter`;
 

@@ -21,14 +21,14 @@
         {
             "name": "Launch Edge Headless and attach DevTools",
             "configurations": [
-                "Launch Microsoft Edge in headless mode",
+                "Launch Edge",
                 "Open Edge DevTools"
             ]
         },
         {
             "name": "Launch Edge and attach DevTools",
             "configurations": [
-                "Launch Microsoft Edge",
+                "Launch Edge",
                 "Open Edge DevTools"
             ]
         }
