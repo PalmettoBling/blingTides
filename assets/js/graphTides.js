@@ -1,7 +1,3 @@
-/*
-const baseUri = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?';
-*/
-
 function graphTides() {
     const apiUri = `https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?station=8665530&date=latest&product=predictions&datum=STND&time_zone=lst_ldt&units=english&format=json`;
     
