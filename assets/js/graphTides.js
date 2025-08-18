@@ -11,6 +11,7 @@ export function graphTides(predictionData) {
         },
         options: {
             parsing: {
+                // need to check this key for if it can change to "time" from this page: https://www.chartjs.org/docs/latest/axes/
                 xAxisKey: 't',
                 yAxisKey: 'v'
             }
