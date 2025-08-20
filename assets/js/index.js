@@ -28,21 +28,17 @@ function craftApiUrl(apiRequestData) {
 }
 
 function setApiData(apiDataToSet) {
-    if (!apiDataToSet) {
-        var today = new Date();
-        var beginDate = today.toISOString().slice(0,10).replace(/-/g,"");
-        apiDefaults = {
-            begin_date: beginDate,
-            range: "48",
-            station: "8665530",
-            product: "predictions",
-            datum: "STND",
-            time_zone: "lst_ldt",
-            units: "english",
-            format: "json"
-        }
-    } else {
+    var today = new Date();
+    var beginDate = today.toISOString().slice(0,10).replace(/-/g,"");
 
-    }
-    
+    // Need to verify edge conditions for date changeover at UTC midnight
+    // Need to verify edge conditions for API call data if not passed default, would resetting it to default cause issues?
+    apiDefaults.begin_date = apiDataToSet.begin_date ?? beginDate;
+    apiDefaults.range = apiDataToSet.range ?? "48";
+    apiDefaults.station = apiDataToSet.station ?? "8665530";
+    apiDefaults.product = apiDataToSet.product ?? "predictions";
+    apiDefaults.datum = apiDataToSet.datum ?? "STND";
+    apiDefaults.time_zone = apiDataToSet.time_zone ?? "lst_ldt";
+    apiDefaults.units = apiDataToSet.units ?? "english";
+    apiDefaults.format = apiDataToSet.format ?? "json";
 }
