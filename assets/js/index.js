@@ -25,7 +25,7 @@ craftApiUri({"beginDate": beginDate});
 
 function craftApiUri(apiRequestData) {
     console.log("Base URI:", tidesPredictionUri.toString());
-    console.log("Crafting API URL with data:", apiRequestData);)
+    console.log("Crafting API URL with data:", apiRequestData);
     tidesPredictionUri.searchParams.set(apiRequestData);
     console.log("Crafted API URL:", tidesPredictionUri.toString());
     return;
