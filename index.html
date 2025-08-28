@@ -4,9 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Tides Charts</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="/assets/js/index.js"></script>
         <!-- <link rel="icon" type="image/x-icon" href="/images/favicon.ico"> -->
     </head>
-    <body>    
+    <body>
         <h1>Tides Chart</h3>
             <h2>Station Info:</h2>
                 <table>
@@ -23,10 +25,12 @@
                 <div>
                     <canvas id="tidesGraph"></canvas>
                 </div>
-        <!--<script src="assets/js/index.js" type="module"></script>-->
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script type="module" src="/assets/js/index.js"></script>
+                <div>
+                    <label for="tideDate">Change Date:</label>
+                    <input type="date" id="tideDate" name="tideDate">
+                </div>
+        <!--<script src="assets/js/index.js" type="module"></script>-->
 
     </body>
 </html>

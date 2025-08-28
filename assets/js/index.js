@@ -1,54 +1,58 @@
 import { graphTides } from "./graphTides.js";
 
-
 const tidesPredictionUri = new URL("https://api.tidesandcurrents.noaa.gov/api/prod/datagetter");
 let today = new Date();
-let beginDate = today.toISOString().slice(0,10).replace(/-/g,"");
-craftApiUri({"beginDate": beginDate});
+let begin_date = today.toISOString().slice(0,10).replace(/-/g,"");
+craftApiUri({"begin_date": begin_date});
 
-/*fetch(tidesPredictionUri)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        return response.json();
-    })
-    .then(data => {
-        let predictionData = data.predictions;
-        
-        graphTides(predictionData);
-    })
-    .catch(error => {
-        console.error('Error fetching data:', error);
-    });*/
-
-function craftApiUri(apiRequestData) {
-    console.log("Base URI:", tidesPredictionUri.toString());
-    console.log("Crafting API URL with data:", apiRequestData);
-    tidesPredictionUri.searchParams.set(apiRequestData);
-    console.log("Crafted API URL:", tidesPredictionUri.toString());
-    return;
-}
-
+// Function to construct the API URI with default parameters
+// If parameters are not provided, they will be set to default values
 // IF NOT DEFINED, SET DEFAULTS
 // IF DEFINED, SET TO THOSE VALUES
-function craftApiUri({beginDate, range="48", station="8665530", product="predictions", datum="STND", time_zone="lst_ldt", units="english", format="json"} = {}) {
-
-    console.log("Begin Date set to:", beginDate);
-    
+function craftApiUri({begin_date, range="48", station="8665530", product="predictions", datum="STND", time_zone="lst_ldt", units="english", format="json"} = {}) {
     // Need to verify edge conditions for date changeover at UTC midnight
     // Need to verify edge conditions for API call data if not passed default, would resetting it to default cause issues?
-
-
-    /* Replacing with URL object vs string concatenation and data object
-    apiDefaults.begin_date = apiDataToSet.begin_date ?? beginDate;
-    apiDefaults.range = apiDataToSet.range ?? "48";
-    apiDefaults.station = apiDataToSet.station ?? "8665530";
-    apiDefaults.product = apiDataToSet.product ?? "predictions";
-    apiDefaults.datum = apiDataToSet.datum ?? "STND";
-    apiDefaults.time_zone = apiDataToSet.time_zone ?? "lst_ldt";
-    apiDefaults.units = apiDataToSet.units ?? "english";
-    apiDefaults.format = apiDataToSet.format ?? "json";
-    */
+    tidesPredictionUri.searchParams.append("begin_date", begin_date);
+    tidesPredictionUri.searchParams.append("range", range);
+    tidesPredictionUri.searchParams.append("station", station);
+    tidesPredictionUri.searchParams.append("product", product);
+    tidesPredictionUri.searchParams.append("datum", datum);
+    tidesPredictionUri.searchParams.append("time_zone", time_zone);
+    tidesPredictionUri.searchParams.append("units", units);
+    tidesPredictionUri.searchParams.append("format", format);
+    console.log(tidesPredictionUri.toString());
+    graphTidesApiCall(tidesPredictionUri);
 }
+
+// Function to call the API and handle the response
+// Fetch the data from the API and pass it to the graphing function
+// INPUT: URL object with the API endpoint and query parameters
+// OUTPUT: Calls graphTides with the prediction data, which updates page with chart from Chart.js
+function graphTidesApiCall(tidesPredictionUri) {
+    fetch(tidesPredictionUri)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            return response.json();
+        })
+        .then(data => {
+            let predictionData = data.predictions;
+            
+            graphTides(predictionData);
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+}
+
+// Event listener for date input change
+// When the date input changes, update the API URI and fetch new data, then update the chart
+document.getElementById("tideDate").addEventListener("input", function() {
+    let selectedDate = new Date(this.value);
+    console.log("Selected Date on change: " + selectedDate);
+    let formattedDate = selectedDate.toISOString().slice(0,10).replace(/-/g,"");
+    console.log("Formatted Date on change: " + formattedDate);
+    craftApiUri({"begin_date": formattedDate});
+});
