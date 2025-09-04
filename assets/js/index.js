@@ -12,15 +12,16 @@ craftApiUri({"begin_date": begin_date});
 function craftApiUri({begin_date, range="48", station="8665530", product="predictions", datum="STND", time_zone="lst_ldt", units="english", format="json"} = {}) {
     // Need to verify edge conditions for date changeover at UTC midnight
     // Need to verify edge conditions for API call data if not passed default, would resetting it to default cause issues?
-    tidesPredictionUri.searchParams.append("begin_date", begin_date);
-    tidesPredictionUri.searchParams.append("range", range);
-    tidesPredictionUri.searchParams.append("station", station);
-    tidesPredictionUri.searchParams.append("product", product);
-    tidesPredictionUri.searchParams.append("datum", datum);
-    tidesPredictionUri.searchParams.append("time_zone", time_zone);
-    tidesPredictionUri.searchParams.append("units", units);
-    tidesPredictionUri.searchParams.append("format", format);
-    console.log(tidesPredictionUri.toString());
+
+    //needs to SET values, not just append if already set
+    tidesPredictionUri.searchParams.set("begin_date", begin_date);
+    tidesPredictionUri.searchParams.set("range", range);
+    tidesPredictionUri.searchParams.set("station", station);
+    tidesPredictionUri.searchParams.set("product", product);
+    tidesPredictionUri.searchParams.set("datum", datum);
+    tidesPredictionUri.searchParams.set("time_zone", time_zone);
+    tidesPredictionUri.searchParams.set("units", units);
+    tidesPredictionUri.searchParams.set("format", format);
     graphTidesApiCall(tidesPredictionUri);
 }
 
@@ -51,8 +52,6 @@ function graphTidesApiCall(tidesPredictionUri) {
 // When the date input changes, update the API URI and fetch new data, then update the chart
 document.getElementById("tideDate").addEventListener("input", function() {
     let selectedDate = new Date(this.value);
-    console.log("Selected Date on change: " + selectedDate);
-    let formattedDate = selectedDate.toISOString().slice(0,10).replace(/-/g,"");
-    console.log("Formatted Date on change: " + formattedDate);
+    let formattedDate = selectedDate.toISOString().slice(0,10).replace(/-/g,"");    
     craftApiUri({"begin_date": formattedDate});
 });
