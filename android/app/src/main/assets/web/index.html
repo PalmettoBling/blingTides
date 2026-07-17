@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Tides Charts</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script type="module" src="./assets/js/index.js"></script>
+    </head>
+    <body>
+        <h1>Tides Chart</h1>
+        <h2>Station Info:</h2>
+        <table>
+            <tr>
+                <th>Station Location</th>
+                <th>Station ID</th>
+            </tr>
+            <tr>
+                <td>Charleston, SC</td>
+                <td>8665530</td>
+            </tr>
+        </table>
+
+        <div>
+            <canvas id="tidesGraph"></canvas>
+        </div>
+
+        <div>
+            <label for="tideDate">Change Date:</label>
+            <input type="date" id="tideDate" name="tideDate" />
+        </div>
+    </body>
+</html>
